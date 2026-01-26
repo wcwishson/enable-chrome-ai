@@ -4,7 +4,7 @@ English | [中文](README.zh.md)
 
 Enable Gemini in Chrome, AI Powered History search, and DevTools AI Innovations in Google Chrome—without cleaning data or reinstalling.
 
-<img width="1002" height="958" alt="Google Chrome 2026-01-27 04 12 48" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
+<img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
 
 Tiny Python helper that enables Chrome's built-in AI features by patching your local profile data (`variations_country`, `variations_permanent_consistency_country`, and `is_glic_eligible`)—no browser flags required.
 

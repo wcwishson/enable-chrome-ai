@@ -4,7 +4,7 @@
 
 在 Google Chrome 中启用 Gemini、AI 历史搜索、DevTools AI 等创新功能——无需清除数据或重新安装。
 
-<img width="1002" height="958" alt="Google Chrome 2026-01-27 04 12 48" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
+<img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
 
 轻量 Python 脚本，通过修改本地 Chrome 配置（`variations_country`、`variations_permanent_consistency_country` 和 `is_glic_eligible`）启用浏览器内置 AI 功能，无需额外开关。
 
