@@ -88,7 +88,7 @@ def set_all_is_glic_eligible(obj):
     return modified
 
 
-def patch_local_state(user_data_path):
+def patch_local_state(user_data_path, last_version):
     local_state_file = os.path.join(user_data_path, 'Local State')
     if not os.path.exists(local_state_file):
         print('Failed to patch Local State. File not found', local_state_file)
@@ -110,11 +110,13 @@ def patch_local_state(user_data_path):
         modified = True
         print('Patched variations_country')
 
-    # 3. Set variations_permanent_consistency_country[1] to "us" (root level)
+    # 3. Set variations_permanent_consistency_country[0] to last_version, [1] to "us" (root level)
     if 'variations_permanent_consistency_country' in local_state:
         if isinstance(local_state['variations_permanent_consistency_country'], list) and \
            len(local_state['variations_permanent_consistency_country']) >= 2:
-            if local_state['variations_permanent_consistency_country'][1] != 'us':
+            if local_state['variations_permanent_consistency_country'][0] != last_version or \
+               local_state['variations_permanent_consistency_country'][1] != 'us':
+                local_state['variations_permanent_consistency_country'][0] = last_version
                 local_state['variations_permanent_consistency_country'][1] = 'us'
                 modified = True
                 print('Patched variations_permanent_consistency_country')
@@ -143,7 +145,7 @@ def main():
             continue
         main_version = int(last_version.split('.')[0])
         print('Patching Chrome', version, last_version, '"'+user_data_path+'"')
-        patch_local_state(user_data_path)
+        patch_local_state(user_data_path, last_version)
 
     if len(terminated_chromes) > 0:
         print('Restart Chrome')
