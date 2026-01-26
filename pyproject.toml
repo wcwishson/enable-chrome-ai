@@ -1,7 +1,7 @@
 [project]
-name = "show-copilot"
-version = "0.1.0"
-description = "Add your description here"
+name = "enable-chrome-ai"
+version = "1.0"
+description = "Enable Gemini in Chrome, AI Powered History search, DevTools Al Innovations in Google Chrome without cleaning data and reinstall."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
