@@ -2,7 +2,9 @@
 
 [English](README.md) | 中文
 
-轻量 Python 脚本，通过修改本地 Chrome 配置启用浏览器内置 AI 功能，无需额外开关。
+在 Google Chrome 中启用 Gemini、AI 历史搜索、DevTools AI 等创新功能——无需清除数据或重新安装。
+
+轻量 Python 脚本，通过修改本地 Chrome 配置（`variations_country`、`variations_permanent_consistency_country` 和 `is_glic_eligible`）启用浏览器内置 AI 功能，无需额外开关。
 
 ## ✅ 环境要求
 - Python `3.13+`（见 `.python-version` / `pyproject.toml`）
@@ -24,7 +26,7 @@
 - 关闭顶层 Chrome 进程以避免文件锁，再在补丁后恢复。
 - 在 `Local State` 中递归查找并将所有 `is_glic_eligible` 设为 `true`。
 - 在 `Local State` 中将 `variations_country` 设为 `"us"`。
-- 在 `Local State` 中将 `variations_permanent_consistency_country[1]` 设为 `"us"`。
+- 在 `Local State` 中将 `variations_permanent_consistency_country` 设为 `["<版本号>", "us"]`。
 - 重启补丁前已运行的 Chrome 版本。
 
 ## ⚠️ 已知限制 / 注意事项

@@ -2,7 +2,9 @@
 
 English | [中文](README.zh.md)
 
-Tiny Python helper that enables Chrome's built-in AI features by patching your local profile data—no browser flags required.
+Enable Gemini in Chrome, AI Powered History search, and DevTools AI Innovations in Google Chrome—without cleaning data or reinstalling.
+
+Tiny Python helper that enables Chrome's built-in AI features by patching your local profile data (`variations_country`, `variations_permanent_consistency_country`, and `is_glic_eligible`)—no browser flags required.
 
 ## ✅ Requirements
 - Python `3.13+` (see `.python-version` / `pyproject.toml`)
@@ -24,7 +26,7 @@ Tiny Python helper that enables Chrome's built-in AI features by patching your l
 - Kills top-level Chrome processes to avoid file locks, then brings them back.
 - Sets all `is_glic_eligible` to `true` in `Local State` (recursive search).
 - Sets `variations_country` to `"us"` in `Local State`.
-- Sets `variations_permanent_consistency_country[1]` to `"us"` in `Local State`.
+- Sets `variations_permanent_consistency_country` to `["<version>", "us"]` in `Local State`.
 - Restarts any Chrome builds that were running before the patch.
 
 ## ⚠️ Caveats / Known Limitations
