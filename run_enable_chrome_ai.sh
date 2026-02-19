@@ -9,6 +9,8 @@ RUNTIME_DIR="$WORK_ROOT/runtime"
 REPO_DIR="$WORK_ROOT/repo"
 mkdir -p "$LOG_DIR" "$RUNTIME_DIR"
 LOG_FILE="$LOG_DIR/enable_chrome_ai_$(date '+%Y%m%d_%H%M%S').log"
+LOG_KEEP_COUNT="${ENABLE_CHROME_AI_KEEP_LOGS:-20}"
+TEMP_CLONE_MAX_AGE_DAYS="${ENABLE_CHROME_AI_TEMP_CLONE_MAX_AGE_DAYS:-1}"
 
 GUI_MODE="${ENABLE_CHROME_AI_GUI:-0}"
 UV_BIN=""
@@ -50,6 +52,26 @@ fail() {
   echo "$message" >&2
   echo "Details were saved to: $LOG_FILE" >&2
   exit 1
+}
+
+cleanup_work_root() {
+  # Remove stale temporary clone directories left by interrupted runs.
+  if [[ -d "$WORK_ROOT" ]]; then
+    find "$WORK_ROOT" -maxdepth 1 -type d -name 'repo_clone_*' -mtime +"$TEMP_CLONE_MAX_AGE_DAYS" -exec rm -rf {} + >>"$LOG_FILE" 2>&1 || true
+  fi
+
+  # Keep only the most recent N log files to prevent unbounded growth.
+  if [[ -d "$LOG_DIR" ]]; then
+    local log_count
+    log_count="$(find "$LOG_DIR" -type f -name 'enable_chrome_ai_*.log' | wc -l | tr -d ' ')"
+    if [[ "$log_count" =~ ^[0-9]+$ ]] && (( log_count > LOG_KEEP_COUNT )); then
+      local delete_count
+      delete_count=$((log_count - LOG_KEEP_COUNT))
+      find "$LOG_DIR" -type f -name 'enable_chrome_ai_*.log' | sort | head -n "$delete_count" | while IFS= read -r old_log; do
+        rm -f "$old_log" || true
+      done
+    fi
+  fi
 }
 
 find_payload_dir() {
@@ -338,13 +360,14 @@ prepare_python_and_dependencies() {
 
 run_main_script() {
   log "Applying Chrome AI setup..."
-  if ! "$UV_BIN" run --project "$RUNTIME_DIR" main.py <<< "" >>"$LOG_FILE" 2>&1; then
+  if ! "$UV_BIN" run --project "$RUNTIME_DIR" python "$RUNTIME_DIR/main.py" <<< "" >>"$LOG_FILE" 2>&1; then
     fail "Chrome AI setup did not finish successfully."
   fi
 }
 
 main() {
   log "Starting Enable Chrome AI setup."
+  cleanup_work_root
   find_payload_dir
   update_repository
   ensure_chrome_ready

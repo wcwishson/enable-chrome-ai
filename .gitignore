@@ -12,3 +12,9 @@ wheels/
 # Local app/release artifacts
 Enable Chrome AI.app/
 release-assets/
+
+# Local/sensitive machine artifacts
+.DS_Store
+*.log
+.env
+.env.*
