@@ -1,57 +1,58 @@
-# Enable Chrome AI ✨
+# Enable Chrome AI (One-Click macOS App)
 
-Researched and scripted by [lcandy2](https://twitter.com/vanillaCitron).
+This project repackages the original `enable-chrome-ai` script into a click-and-run macOS app.
 
-[![Twitter](https://img.shields.io/twitter/follow/vanillaCitron)](https://twitter.com/vanillaCitron)
-
+The goal is simple: no terminal setup, no manual Python environment steps, and a cleaner user flow for non-technical users.
 
 English | [中文](README.zh.md)
 
-Enable Gemini in Chrome, AI Powered History search, and DevTools AI Innovations in Google Chrome—without cleaning data or reinstalling.
+## Quick Start (No Coding)
 
-<img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
+1. Open [Releases](../../releases).
+2. Download the latest `.zip` containing `Enable Chrome AI.app`.
+3. Unzip it.
+4. Move `Enable Chrome AI.app` to `/Applications` (recommended).
+5. Open the app.
+6. If macOS blocks it the first time: right-click the app and choose **Open**.
+7. Click **Continue** in the app dialog and wait for completion.
 
-Tiny Python helper that enables Chrome's built-in AI features by patching your local profile data (`variations_country`, `variations_permanent_consistency_country`, and `is_glic_eligible`)—no browser flags required.
+## What The App Does Automatically
 
-## ✅ Requirements
-- Python `3.13+` (see `.python-version` / `pyproject.toml`)
-- Google Chrome installed (Stable/Canary/Dev/Beta)
+- Uses the original upstream script source for updates by default (`lcandy2/enable-chrome-ai`).
+- Falls back to bundled scripts when update tools or network are unavailable.
+- Installs required runtime/dependencies automatically on first run.
+- Applies the local graceful-quit compatibility patch, so Chrome is less likely to show an unexpected-close warning.
+- Runs the Chrome AI patch process and relaunches Chrome.
 
-## ⚡️ Quick Start (uv)
-1. Install uv (once):
-   - Windows: `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
-   - macOS & Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-   - See [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/) for more options.
-2. Install deps (creates venv automatically): `uv sync`.
-3. Run the script: `uv run main.py`.
-4. Chrome will close while patching; after it restarts, press Enter to finish.
+## Important Notes
 
-## ⚡️ Quick Start (pip)
-1. Create and activate a venv.
-2. Install deps: `python -m pip install psutil`.
-3. Run: `python main.py`.
+- Chrome may close and reopen while setup runs.
+- The script edits your Chrome profile `Local State` file.
+- Back up your Chrome profile if you want a rollback option.
+- Run the app as the same macOS user that owns the Chrome profile.
 
-## 🔧 What Happens
-- Finds Chrome user data for Stable/Canary/Dev/Beta on Windows, macOS, and Linux.
-- Kills top-level Chrome processes to avoid file locks, then brings them back.
-- Sets all `is_glic_eligible` to `true` in `Local State` (recursive search).
-- Sets `variations_country` to `"us"` in `Local State`.
-- Sets `variations_permanent_consistency_country` to `["<version>", "us"]` in `Local State`.
-- Restarts any Chrome builds that were running before the patch.
+## Troubleshooting
 
-## ⚠️ Caveats / Known Limitations
-- The script expects `User Data/Local State` to exist; if it's missing, the run can fail (launch Chrome once to generate it).
-- Chrome restart only happens if the executable path can be detected from running processes.
-- On macOS, process detection is name-based (`Google Chrome*`) and may terminate more than just the "top-level" app process.
-- On Linux, process detection expects an executable name of `chrome`; if your build uses a different name, Chrome may not be closed (and files may remain locked).
+- If setup fails, click **Open Logs** in the app dialog.
+- Logs and runtime files are stored at: `~/Library/Application Support/Enable Chrome AI/`.
+- If Chrome is missing, the app opens the Chrome download page.
 
-## 🛟 Notes
-- The script writes to your existing Chrome profile; back up `User Data` if you want a safety net.
-- Run as the same OS user who owns the Chrome profile to ensure write access.
-- Not affiliated with Google—use at your own risk.
+## For Maintainers
 
-## 📜 License
-Please credit this project when reposting or creating derivative works.
+- Fork/release workflow: `FORKING.md`
+- Third-party attribution notice: `THIRD_PARTY_NOTICES.md`
+- Rebuild portable app bundle:
 
-## 🙏 Acknowledgments
-- [show-copilot](https://github.com/hzkaai/show-copilot)
+```bash
+scripts/build_portable_app.sh
+```
+
+## Credits
+
+- Original research/script: [lcandy2](https://github.com/lcandy2)
+- Original project: [lcandy2/enable-chrome-ai](https://github.com/lcandy2/enable-chrome-ai)
+- Repackaging/UX/app-bundle work: this fork
+
+## License
+
+MIT. Keep license and attribution when redistributing derivative work.
