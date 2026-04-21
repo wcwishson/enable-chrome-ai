@@ -1,6 +1,6 @@
 [project]
 name = "enable-chrome-ai"
-version = "1.1.0"
+version = "1.2.0"
 description = "One-click Windows app and Python helper for restoring Chrome's built-in Gemini and AI features."
 readme = "README.md"
 requires-python = ">=3.13"

@@ -1,77 +1,102 @@
 # Enable Chrome AI
 
-Enable Chrome's built-in Gemini / AI features with a simple Windows app.
+One-click helpers for restoring Chrome's built-in Gemini / AI features.
 
-This project is based on the original research and script by [lcandy2](https://twitter.com/vanillaCitron), with a Windows click-to-run app added for people who do not want to use Python or the command line.
+This fork includes:
+
+- A Windows app: `EnableChromeAI.exe`
+- A macOS app bundle: `Enable Chrome AI.app`
+- The original Python script workflow for advanced users
+
+The goal is simple: download the app for your system, run it, let it restart Chrome, and check whether Chrome AI is back.
 
 English | [中文](README.zh.md)
 
 <img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
 
-## Download for Windows
+## Download
 
-Go to the [Releases](https://github.com/wcwishson/enable-chrome-ai/releases) page and download:
+Open the [Releases](../../releases) page and download the package for your system.
 
-- `EnableChromeAI-Release.zip` if you want the app plus a short user guide.
-- `EnableChromeAI.exe` if you only want the app.
+For Windows:
 
-Unzip the file if needed, then double-click `EnableChromeAI.exe`.
+- Download `EnableChromeAI-Release.zip`.
+- Unzip it.
+- Double-click `EnableChromeAI.exe`.
+
+For macOS:
+
+- Download the latest `.zip` containing `Enable Chrome AI.app`.
+- Unzip it.
+- Move `Enable Chrome AI.app` to `/Applications` if you like.
+- Open the app. If macOS blocks it the first time, right-click the app and choose `Open`.
 
 ## How to Use
 
 1. Save anything important in Chrome.
-2. Double-click `EnableChromeAI.exe`.
-3. If Chrome is open, the app will ask for permission to restart it.
-4. Click `OK` to continue.
-5. Wait a few seconds while the app applies the fix.
-6. Chrome should reopen automatically.
-7. Look for Gemini / Chrome AI features in Chrome.
+2. Open the app for your system.
+3. If Chrome is already open, allow the app to restart it.
+4. Wait for the app to finish.
+5. Chrome should reopen automatically.
+6. Check whether Gemini / Chrome AI is available again.
 
-The app is designed for normal Windows users. You do not need Python, PowerShell, or developer tools.
+You do not need Python, PowerShell, Terminal, or developer tools when using the packaged app.
 
 ## What the App Does
 
-- Finds your installed Google Chrome profile.
+- Finds your Google Chrome profile.
 - Closes Chrome so the settings can be updated safely.
 - Applies the local Chrome AI availability fix.
-- Restarts Chrome and tries to restore your previous windows and tabs.
-- Shows a warning if Chrome still reports likely account or region blockers.
+- Reopens Chrome and tries to restore your previous windows and tabs.
+- Warns you if Chrome still appears to be blocked by account or region checks.
 
 ## Important Notes
 
-- This app works with Google Chrome on Windows.
-- It does not install Chrome for you.
-- It does not create a Google account or change your Google account region.
-- It cannot guarantee Gemini appears for every Chrome version, Google account, or network location.
-- If Chrome recently updated and Gemini disappeared, running the app again may restore it.
+- Google Chrome must already be installed.
+- The app does not create or modify your Google account.
+- The app cannot guarantee Gemini appears for every Chrome version, Google account, or network location.
+- If Chrome updates and Gemini disappears again, run the app again.
 - If Gemini still does not appear, make sure Chrome is signed in and your network is using a supported region.
 
-## For Advanced Users
+## Privacy
 
-The Python script is still available for people who prefer running it manually:
+The app changes local Chrome settings on your computer. It does not collect your data, upload your Chrome profile, or send your browsing history anywhere.
+
+## Advanced Users
+
+Run the Python script manually:
 
 ```powershell
 uv sync
 uv run main.py
 ```
 
-You can build the Windows app locally with:
+Build the Windows app locally:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\build_windows.ps1
 ```
 
-Build output goes to `dist/`, which is intentionally ignored by git.
+Build the macOS app bundle locally:
 
-## Privacy
+```bash
+scripts/build_portable_app.sh
+```
 
-The app changes local Chrome settings on your computer. It does not collect your data, upload your Chrome profile, or send your browsing history anywhere.
+Build outputs are intentionally ignored by git.
 
-## License and Credits
+## Maintainers
 
-Please credit the original project and this Windows version if you repost or share modified builds.
+- Fork/release workflow: `FORKING.md`
+- Third-party attribution notice: `THIRD_PARTY_NOTICES.md`
+- Windows user guide source: `release/Read Me First - Enable Chrome AI.txt`
 
-Acknowledgments:
+## Credits
 
-- [lcandy2/enable-chrome-ai](https://github.com/lcandy2/enable-chrome-ai)
-- [show-copilot](https://github.com/hzkaai/show-copilot)
+- Original research/script: [lcandy2](https://github.com/lcandy2)
+- Original project: [lcandy2/enable-chrome-ai](https://github.com/lcandy2/enable-chrome-ai)
+- Additional inspiration: [show-copilot](https://github.com/hzkaai/show-copilot)
+
+## License
+
+MIT. Keep license and attribution when redistributing derivative work.

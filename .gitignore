@@ -9,13 +9,18 @@ wheels/
 .mypy_cache/
 .ruff_cache/
 *.spec
-*.log
 
 # Virtual environments
 .venv
 .venv/
 
-# Local secrets and machine-specific files
+# Local app/release artifacts
+Enable Chrome AI.app/
+release-assets/
+
+# Local/sensitive machine artifacts
+.DS_Store
+*.log
 .env
 .env.*
 *.local
