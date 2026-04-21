@@ -1,0 +1,42 @@
+ENABLE CHROME AI FOR WINDOWS
+
+What is this?
+
+EnableChromeAI.exe is a small Windows app that tries to restore Chrome's built-in Gemini / AI features when they disappear after a Chrome update or regional setting change.
+
+You do not need Python, PowerShell, or any developer tools.
+
+How to use it
+
+1. Save anything important in Chrome.
+2. Double-click EnableChromeAI.exe.
+3. If Chrome is open, click OK when the app asks to restart it.
+4. Wait a few seconds.
+5. Chrome should reopen automatically.
+6. Check whether Gemini / Chrome AI is available again.
+
+What the app does
+
+- Finds your Google Chrome profile.
+- Closes Chrome so the settings can be updated safely.
+- Applies the Chrome AI availability fix.
+- Reopens Chrome and tries to restore your tabs.
+- Warns you if Chrome still appears to be blocked by account or region checks.
+
+What it does not do
+
+- It does not install Google Chrome.
+- It does not create or modify your Google account.
+- It does not guarantee Gemini appears for every account, Chrome version, or network location.
+- It does not collect your browsing history or upload your Chrome profile.
+
+If Gemini still does not appear
+
+- Make sure you are signed in to Chrome.
+- Make sure your network is using a supported region.
+- Try running the app again after Chrome has fully closed.
+- If Chrome recently updated, this app may need to be run again.
+
+In one sentence:
+
+Double-click the app, let it restart Chrome, then check whether Chrome AI is back.

@@ -1,57 +1,77 @@
-# Enable Chrome AI ✨
+# Enable Chrome AI
 
-Researched and scripted by [lcandy2](https://twitter.com/vanillaCitron).
+Enable Chrome's built-in Gemini / AI features with a simple Windows app.
 
-[![Twitter](https://img.shields.io/twitter/follow/vanillaCitron)](https://twitter.com/vanillaCitron)
-
+This project is based on the original research and script by [lcandy2](https://twitter.com/vanillaCitron), with a Windows click-to-run app added for people who do not want to use Python or the command line.
 
 English | [中文](README.zh.md)
 
-Enable Gemini in Chrome, AI Powered History search, and DevTools AI Innovations in Google Chrome—without cleaning data or reinstalling.
-
 <img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
 
-Tiny Python helper that enables Chrome's built-in AI features by patching your local profile data (`variations_country`, `variations_permanent_consistency_country`, and `is_glic_eligible`)—no browser flags required.
+## Download for Windows
 
-## ✅ Requirements
-- Python `3.13+` (see `.python-version` / `pyproject.toml`)
-- Google Chrome installed (Stable/Canary/Dev/Beta)
+Go to the [Releases](https://github.com/wcwishson/enable-chrome-ai/releases) page and download:
 
-## ⚡️ Quick Start (uv)
-1. Install uv (once):
-   - Windows: `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
-   - macOS & Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-   - See [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/) for more options.
-2. Install deps (creates venv automatically): `uv sync`.
-3. Run the script: `uv run main.py`.
-4. Chrome will close while patching; after it restarts, press Enter to finish.
+- `EnableChromeAI-Release.zip` if you want the app plus a short user guide.
+- `EnableChromeAI.exe` if you only want the app.
 
-## ⚡️ Quick Start (pip)
-1. Create and activate a venv.
-2. Install deps: `python -m pip install psutil`.
-3. Run: `python main.py`.
+Unzip the file if needed, then double-click `EnableChromeAI.exe`.
 
-## 🔧 What Happens
-- Finds Chrome user data for Stable/Canary/Dev/Beta on Windows, macOS, and Linux.
-- Kills top-level Chrome processes to avoid file locks, then brings them back.
-- Sets all `is_glic_eligible` to `true` in `Local State` (recursive search).
-- Sets `variations_country` to `"us"` in `Local State`.
-- Sets `variations_permanent_consistency_country` to `["<version>", "us"]` in `Local State`.
-- Restarts any Chrome builds that were running before the patch.
+## How to Use
 
-## ⚠️ Caveats / Known Limitations
-- The script expects `User Data/Local State` to exist; if it's missing, the run can fail (launch Chrome once to generate it).
-- Chrome restart only happens if the executable path can be detected from running processes.
-- On macOS, process detection is name-based (`Google Chrome*`) and may terminate more than just the "top-level" app process.
-- On Linux, process detection expects an executable name of `chrome`; if your build uses a different name, Chrome may not be closed (and files may remain locked).
+1. Save anything important in Chrome.
+2. Double-click `EnableChromeAI.exe`.
+3. If Chrome is open, the app will ask for permission to restart it.
+4. Click `OK` to continue.
+5. Wait a few seconds while the app applies the fix.
+6. Chrome should reopen automatically.
+7. Look for Gemini / Chrome AI features in Chrome.
 
-## 🛟 Notes
-- The script writes to your existing Chrome profile; back up `User Data` if you want a safety net.
-- Run as the same OS user who owns the Chrome profile to ensure write access.
-- Not affiliated with Google—use at your own risk.
+The app is designed for normal Windows users. You do not need Python, PowerShell, or developer tools.
 
-## 📜 License
-Please credit this project when reposting or creating derivative works.
+## What the App Does
 
-## 🙏 Acknowledgments
+- Finds your installed Google Chrome profile.
+- Closes Chrome so the settings can be updated safely.
+- Applies the local Chrome AI availability fix.
+- Restarts Chrome and tries to restore your previous windows and tabs.
+- Shows a warning if Chrome still reports likely account or region blockers.
+
+## Important Notes
+
+- This app works with Google Chrome on Windows.
+- It does not install Chrome for you.
+- It does not create a Google account or change your Google account region.
+- It cannot guarantee Gemini appears for every Chrome version, Google account, or network location.
+- If Chrome recently updated and Gemini disappeared, running the app again may restore it.
+- If Gemini still does not appear, make sure Chrome is signed in and your network is using a supported region.
+
+## For Advanced Users
+
+The Python script is still available for people who prefer running it manually:
+
+```powershell
+uv sync
+uv run main.py
+```
+
+You can build the Windows app locally with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build_windows.ps1
+```
+
+Build output goes to `dist/`, which is intentionally ignored by git.
+
+## Privacy
+
+The app changes local Chrome settings on your computer. It does not collect your data, upload your Chrome profile, or send your browsing history anywhere.
+
+## License and Credits
+
+Please credit the original project and this Windows version if you repost or share modified builds.
+
+Acknowledgments:
+
+- [lcandy2/enable-chrome-ai](https://github.com/lcandy2/enable-chrome-ai)
 - [show-copilot](https://github.com/hzkaai/show-copilot)

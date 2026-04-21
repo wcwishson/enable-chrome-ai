@@ -1,7 +1,7 @@
 [project]
 name = "enable-chrome-ai"
-version = "1.0"
-description = "Enable Gemini in Chrome, AI Powered History search, DevTools Al Innovations in Google Chrome without cleaning data and reinstall."
+version = "1.1.0"
+description = "One-click Windows app and Python helper for restoring Chrome's built-in Gemini and AI features."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

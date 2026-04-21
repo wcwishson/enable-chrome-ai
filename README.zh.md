@@ -1,56 +1,77 @@
-# Enable Chrome AI ✨
+# Enable Chrome AI
 
-由 [lcandy2](https://twitter.com/vanillaCitron) 研究并制作脚本。
+用一个简单的 Windows 小工具，尝试恢复 / 启用 Chrome 内置的 Gemini 和 AI 功能。
 
-[![Twitter](https://img.shields.io/twitter/follow/vanillaCitron)](https://twitter.com/vanillaCitron)
+本项目基于 [lcandy2](https://twitter.com/vanillaCitron) 的原始研究和脚本，并额外加入了适合普通用户使用的 Windows 双击版程序。
 
 [English](README.md) | 中文
 
-在 Google Chrome 中启用 Gemini、AI 历史搜索、DevTools AI 等创新功能——无需清除数据或重新安装。
-
 <img width="512" alt="Google Chrome Gemini in Chrome" src="https://github.com/user-attachments/assets/a88c56a7-f20b-432a-926c-0184194225b4" />
 
-轻量 Python 脚本，通过修改本地 Chrome 配置（`variations_country`、`variations_permanent_consistency_country` 和 `is_glic_eligible`）启用浏览器内置 AI 功能，无需额外开关。
+## Windows 下载
 
-## ✅ 环境要求
-- Python `3.13+`（见 `.python-version` / `pyproject.toml`）
-- 已安装 Google Chrome（Stable/Canary/Dev/Beta）
+打开 [Releases](https://github.com/wcwishson/enable-chrome-ai/releases) 页面，下载：
 
-## ⚡️ 快速开始（uv）
-1. 安装 uv（一次性）：
-   - Windows: `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
-   - macOS & Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-   - 更多安装方式请参考 [uv 安装文档](https://docs.astral.sh/uv/getting-started/installation/)。
-2. 安装依赖（自动创建虚拟环境）：`uv sync`。
-3. 运行脚本：`uv run main.py`。
-4. 补丁过程中 Chrome 会被关闭；重启后根据提示按 Enter 结束。
+- `EnableChromeAI-Release.zip`：包含程序、说明文件和许可证。
+- `EnableChromeAI.exe`：只下载程序本体。
 
-## ⚡️ 快速开始（pip）
-1. 创建并激活虚拟环境。
-2. 安装依赖：`python -m pip install psutil`。
-3. 运行：`python main.py`。
+如果下载的是 zip，先解压，然后双击 `EnableChromeAI.exe`。
 
-## 🔧 做了什么
-- 自动定位 Windows / macOS / Linux 上的 Chrome Stable / Canary / Dev / Beta 用户数据目录。
-- 关闭顶层 Chrome 进程以避免文件锁，再在补丁后恢复。
-- 在 `Local State` 中递归查找并将所有 `is_glic_eligible` 设为 `true`。
-- 在 `Local State` 中将 `variations_country` 设为 `"us"`。
-- 在 `Local State` 中将 `variations_permanent_consistency_country` 设为 `["<版本号>", "us"]`。
-- 重启补丁前已运行的 Chrome 版本。
+## 使用方法
 
-## ⚠️ 已知限制 / 注意事项
-- 脚本假设 `User Data/Local State` 已存在；若缺失可能直接失败（可先启动一次 Chrome 生成配置）。
-- 只有在能从进程信息中取到可执行文件路径时，脚本才会自动重启 Chrome。
-- macOS 上按进程名（`Google Chrome*`）识别，可能会终止不止"顶层"应用进程。
-- Linux 上按可执行文件名 `chrome` 识别；若你的发行版/安装方式使用其他名字，可能不会关闭 Chrome（从而仍可能有文件锁）。
+1. 先保存 Chrome 中重要的网页或工作。
+2. 双击 `EnableChromeAI.exe`。
+3. 如果 Chrome 正在运行，程序会提示需要重启 Chrome。
+4. 点击 `OK` 继续。
+5. 等待几秒钟。
+6. Chrome 会自动重新打开。
+7. 打开 Chrome，检查右上角或相关页面里 Gemini / Chrome AI 是否恢复。
 
-## 🛟 注意
-- 脚本会修改现有 Chrome 配置，如需保险请先备份 `User Data`。
-- 使用拥有该 Chrome 配置的同一系统用户运行，确保有写入权限。
-- 与 Google 无关，风险自担。
+这个程序面向普通 Windows 用户，不需要安装 Python，也不需要打开命令行。
 
-## 📜 许可
-转载或基于本研究二次创作需要注明来源。
+## 程序会做什么
 
-## 🙏 致谢
+- 自动找到你的 Google Chrome 配置。
+- 关闭 Chrome，避免配置文件正在被占用。
+- 应用 Chrome AI 可用性相关的本地修复。
+- 重新打开 Chrome，并尽量恢复之前的窗口和标签页。
+- 如果 Chrome 仍然显示账号或地区相关的限制，会在运行前给出提示。
+
+## 注意事项
+
+- 这个双击版程序面向 Windows 版 Google Chrome。
+- 它不会帮你安装 Chrome。
+- 它不会创建 Google 账号，也不会修改你的 Google 账号地区。
+- 它不能保证所有 Chrome 版本、所有账号、所有网络环境都一定显示 Gemini。
+- 如果 Chrome 自动更新后 Gemini 消失，可以再次运行本程序尝试恢复。
+- 如果仍然不显示，请确认 Chrome 已登录账号，并且网络出口位于支持 Gemini in Chrome 的地区。
+
+## 高级用户
+
+如果你想手动运行 Python 脚本，也可以使用：
+
+```powershell
+uv sync
+uv run main.py
+```
+
+本地构建 Windows 程序：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build_windows.ps1
+```
+
+构建结果会生成在 `dist/`，该目录不会提交到 git。
+
+## 隐私说明
+
+程序只会修改你电脑上的本地 Chrome 设置。它不会收集你的数据，不会上传 Chrome 配置，也不会发送浏览历史。
+
+## 许可与致谢
+
+如果转载或发布修改版，请注明原始项目和此 Windows 版本来源。
+
+致谢：
+
+- [lcandy2/enable-chrome-ai](https://github.com/lcandy2/enable-chrome-ai)
 - [show-copilot](https://github.com/hzkaai/show-copilot)
